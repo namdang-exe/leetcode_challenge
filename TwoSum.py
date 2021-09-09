@@ -11,4 +11,4 @@ for i in range(len(nums)):
             needed_idx.append(i)
             needed_idx.append(j)
 
-print(needed_idx)
+print(f"The answer is {needed_idx}")
