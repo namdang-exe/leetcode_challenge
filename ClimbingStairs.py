@@ -1,6 +1,6 @@
 n = 2
 
-
+# Brute force recufsive solution
 def climb_stairs(i, n):
     if i > n:
         return 0
