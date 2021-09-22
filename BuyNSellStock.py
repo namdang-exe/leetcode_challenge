@@ -1,6 +1,7 @@
-prices = [1, 5, 3, 2, 8, 9]
+# prices = [1, 5, 3, 2, 8, 9]
+prices = [7,1,5,3,6,4]
 
-
+# Brute force attempt
 def maxProfit(prices):
     max_profit = 0
     profit = 0
