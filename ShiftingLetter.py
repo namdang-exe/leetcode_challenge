@@ -2,7 +2,7 @@
 from typing import List
 
 
-def shiftingLetters(self, s: str, shifts: List[int]) -> str:
+def shiftingLetters(s: str, shifts: List[int]) -> str:
     def shiftLet(s, n):
         return chr((ord(s) + n - 97) % 26 + 97)
 
@@ -11,3 +11,5 @@ def shiftingLetters(self, s: str, shifts: List[int]) -> str:
         for j in range(i + 1):
             s[j] = shiftLet(s[j], shifts[i])
     return ''.join(s)
+
+print(shiftingLetters(s, shifts))
