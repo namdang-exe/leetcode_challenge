@@ -1,15 +1,20 @@
-# Brute force
-from typing import List
-
-
-def shiftingLetters(s: str, shifts: List[int]) -> str:
-    def shiftLet(s, n):
-        return chr((ord(s) + n - 97) % 26 + 97)
-
-    s = list(s)
-    for i in range(len(s)):
-        for j in range(i + 1):
-            s[j] = shiftLet(s[j], shifts[i])
-    return ''.join(s)
-
-print(shiftingLetters(s, shifts))
+class Solution:
+    def shiftingLetters(self, s: str, shifts: List[int]) -> str:
+        # shift a by 1 ----> aka b
+        
+        # ord('a') - ord('a') ----> 0
+        # 0 + 1 ----> 1 , need to wrap around % 26
+        # 1 + 97 ----> 98 ----> 'b'
+        # chr((ord(c) - ord('a') + shift)%26 + ord('a'))
+        
+        # [3,5,9]
+        # [9,5,3]
+        # [9, 14, 17]
+        # [17, 14, 9]
+        
+        shifts = list(accumulate(shifts[::-1]))[::-1]
+        s = list(s)
+        for i, shift in enumerate(shifts):
+            s[i] = chr((ord(s[i]) - ord('a') + shift)%26 + ord('a'))
+                
+        return ''.join(s)
