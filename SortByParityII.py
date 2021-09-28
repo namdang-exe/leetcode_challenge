@@ -1,16 +1,21 @@
 class Solution:
     def sortArrayByParityII(self, nums: List[int]) -> List[int]:
-        # One pass, 2 arrays
-        odd = []
-        even = []
-        for num in nums:
-            # even
-            if num % 2 == 0:
-                even.append(num)
+        # This method works because numbers of even number = numbers of odd number
+        # Time: O(n)
+        # Space: O(1)
+        # 2 pointers method
+        # if pointer points to the correct value, move to the next index (pointer++)
+        # if both pointers point to wrong values, swap their value
+        # Idea behind: Eventually both pointers will point to the wrong value if the list is not already sorted
+        # it is because numbers of even number = numbers of odd number
+        evenPt = 0
+        oddPt = 1
+        while evenPt < len(nums) and oddPt <len(nums):
+            if nums[evenPt] % 2 == 0:
+                evenPt += 2
+            elif nums[oddPt] % 2 != 0:
+                oddPt += 2
+            # when both pointers point to a wrong value
             else:
-                odd.append(num)
-        out = []
-        for e, o in zip(even, odd):
-            out.append(e)
-            out.append(o)
-        return out
+                nums[evenPt], nums[oddPt] = nums[oddPt], nums[evenPt]
+        return nums
