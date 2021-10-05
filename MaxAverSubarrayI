@@ -1,0 +1,9 @@
+# Brute force approach
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        max_mean = float('-inf')
+        for i in range(len(nums)-k+1):
+            sub_arr = nums[i:i+k]
+            cur_mean = sum(sub_arr) / k
+            max_mean = max(max_mean, cur_mean)
+        return max_mean
