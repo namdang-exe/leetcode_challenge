@@ -1,9 +1,13 @@
-# Brute force approach
+# Improved O(n) sliding window solution
 class Solution:
     def findMaxAverage(self, nums: List[int], k: int) -> float:
         max_mean = float('-inf')
-        for i in range(len(nums)-k+1):
-            sub_arr = nums[i:i+k]
-            cur_mean = sum(sub_arr) / k
-            max_mean = max(max_mean, cur_mean)
+        start = 0
+        cur_window = 0
+        for end, val in enumerate(nums):
+            cur_window += val
+            if end - start + 1 == k:
+                max_mean = max(max_mean, cur_window/k)
+                cur_window -= nums[start]
+                start += 1
         return max_mean
