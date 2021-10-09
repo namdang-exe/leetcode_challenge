@@ -1,0 +1,36 @@
+# O(n)
+# This deque will always be in decreasing order
+
+from collections import deque
+
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        res = []
+        q = deque()
+        l = r = 0
+        
+        # Loop through entire list
+        while r < len(nums):
+            # We want to use a decreasing queue
+            # Because we can get the max by popleft
+            # In a deque, popleft cost O(1)
+            # On the contrary, max(numbers_list) take O(k) time
+            # Clearly, deque is more efficient
+            
+            # Because it is a decreasing queue
+            # We need to make sure to pop everything smaller than current value
+            # [1,1,1], cur_val = 4 ---> [4]
+
+            while q and nums[q[-1]] < nums[r]:
+                q.pop()
+            q.append(r)
+            # Remove left val from window
+            if l > q[0]:
+                q.popleft()
+            
+            # When there are k numbers in the window
+            if r - l + 1 == k:
+                res.append(nums[q[0]])
+                l += 1
+            r += 1
+        return res
