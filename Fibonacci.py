@@ -1,14 +1,12 @@
-# Recursive with Memoise
-class Solution:
-    def fib(self, n: int) -> int:
-        cache = {}
-        def fibSeq(cache, n):
-            if cache.get(n) is not None:
-                return cache[n]
-            if n == 0: return 0
-            if n == 1: return 1
-            else: 
-                res = fibSeq(cache, n-1) + fibSeq(cache, n-2)
-                cache[n] = res
-                return res
-        return fibSeq(cache, n)
+# bottom up approach
+cache = {}
+def fib(cache,n):
+    for k in range(n+1):
+        if k < 2:
+            res = 1
+        else: 
+            res = cache[k-1] + cache[k-2]
+        cache[k] = res
+    return cache[n]
+
+print(fib(cache, 7))
