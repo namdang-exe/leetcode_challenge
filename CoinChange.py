@@ -1,7 +1,13 @@
 """
-# Recursive Approach O(amount**coin) time
+
+# Recursive Approach O(amount**coin) time with memoize
 # have n as a parameter
 # take the last coin
+
+# Memoize
+# store (n, remain)
+
+
 
 # if there is no coin permutation that can make remain, return -1
 # E.g. [2], remain = 1 ====> return -1
@@ -24,8 +30,11 @@
 #   2. Subproblem that does not contain the last coin, remain stay the same
 #       E.g. 11, [1,2]
 
+
 """
 class Solution:
+    def __init__(self):
+        self.mem = {}
     def coinChange(self, coins: List[int], amount: int) -> int:
         n = len(coins)
         coins = sorted(coins)
@@ -36,6 +45,8 @@ class Solution:
     
         
     def minCoinsRecursion(self, coins, remain, n):
+        if self.mem.get((n, remain)) is not None:
+            return self.mem[(n, remain)]
         if remain == 0:
             return 0
         if remain > 0 and n == 0:
@@ -43,4 +54,5 @@ class Solution:
         if coins[n-1] > remain:
             return self.minCoinsRecursion(coins, remain, n-1)
         minCoins = min(1 + self.minCoinsRecursion(coins, remain-coins[n-1], n), self.minCoinsRecursion(coins, remain, n-1))
+        self.mem[(n,remain)] = minCoins
         return minCoins
