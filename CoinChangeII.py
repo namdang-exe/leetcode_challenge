@@ -4,9 +4,10 @@
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
         coins = sorted(coins)
-        return self.recursion(amount, coins)
+        n = len(coins)
+        return self.recursion(amount, coins, n)
         
-    def recursion(self, remain, coins):
+    def recursion(self, remain, coins, n):
         # [1,2,5], and amt = 5
         # Problem can be broken into 2 subproblems:
         #   1. Subproblem that contains all coins and
@@ -18,8 +19,7 @@ class Solution:
         # base cases
         if remain == 0:
             return 1
-        if remain < 0 or len(coins) == 0:
+        if remain < 0 or n == 0:
             return 0
-        
-        return self.recursion(remain - coins[-1], coins) + self.recursion(remain, coins[:-1])
-    
+        res = self.recursion(remain - coins[n-1], coins, n) + self.recursion(remain, coins, n-1)
+        return res
