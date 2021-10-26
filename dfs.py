@@ -2,8 +2,7 @@ def depthFirstSearch(graph, source):
     # dfs iterative
     # go all the way down one path
     # use stack - last in first out
-    stack = []
-    stack.append(source)
+    stack = [source]
     while stack:
         current = stack.pop()
         print(current)
