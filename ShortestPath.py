@@ -1,8 +1,7 @@
 def shortest_path(edges, node_A, node_B):
   graph = build_graph(edges)
   visited = set()
-  path = bfs(graph, node_A, node_B, visited)
-  return path if path != float('inf') else -1
+  return bfs(graph, node_A, node_B, visited)
   
   
 def build_graph(edges):
@@ -19,16 +18,17 @@ def build_graph(edges):
 def bfs(graph, src, dst, visited):
   # bfs iterative
   # queue
+  # Don't need a min tracker because wherever it touches first is the shortest one
   q = [(src, 0)]
-  min_path = float('inf')
   while q:
     current = q.pop()
     node, dist = current
     visited.add(node)
     if node == dst:
-      min_path = min(min_path, dist)
+      return dist
     for neighbor in graph[node]:
       if not neighbor in visited:
         q = [(neighbor, dist+1)] + q
-  return min_path
+  return -1
         
+    
