@@ -10,39 +10,32 @@ class Solution:
         # bfs iterative
         # queue
         
-        if p is None and q is None:
+        if not p and not q:
             return True
-        if p is None or q is None:
+        if not p or not q:
             return False
         
-        p_q = deque([p])
-        q_q = deque([q]) 
-        while p_q or q_q:
-            cur_p = p_q.pop()
-            cur_q = q_q.pop()
+        qu = deque([[p,q], ])
+        while qu:
+            current = qu.pop()
+            cur_p, cur_q = current                   
+
             if cur_p.val != cur_q.val:
                 return False
             
             # left and right node:
-            if cur_p.left is None and cur_q.left is not None:
+            if not cur_p.left and cur_q.left:
                 return False
-            if cur_p.right is None and cur_q.right is not None:
+            if not cur_p.right and cur_q.right:
                 return False
-            if cur_p.left is not None and cur_q.left is None:
+            if cur_p.left and not cur_q.left:
                 return False
-            if cur_p.right is not None and cur_q.right is None:
+            if cur_p.right and not cur_q.right:
                 return False
             
-            if cur_p.left is not None: 
-                p_q.appendleft(cur_p.left)
-            if cur_p.right is not None: 
-                p_q.appendleft(cur_p.right)
-            if cur_q.left is not None: 
-                q_q.appendleft(cur_q.left)
-            if cur_q.right is not None: 
-                q_q.appendleft(cur_q.right)
-        
-        if len(p_q) != 0 or len(q_q) != 0:
-            return False
-        
+            if cur_p.left and cur_q.left: 
+                qu.appendleft([cur_p.left, cur_q.left])
+            if cur_p.right and cur_q.right: 
+                qu.appendleft([cur_p.right, cur_q.right])
+
         return True
