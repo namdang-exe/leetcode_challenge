@@ -4,7 +4,30 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from collections import deque
 class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        # bfs iterative
+        # queue
+        if root is None:
+            return 0
+        
+        q = deque([[root, 1], ])
+        while q:
+            current = q.pop()
+            cur_node, cur_depth = current
+            
+            # Update min tracker if it is a leaf
+            if cur_node.left is None and cur_node.right is None: # a leaf
+                return cur_depth
+            
+            # left and right node
+            if cur_node.left is not None: q.appendleft([cur_node.left, cur_depth + 1])
+            if cur_node.right is not None: q.appendleft([cur_node.right, cur_depth + 1])
+                
+        return min_tracker
+    
+    
     def minDepth(self, root: Optional[TreeNode]) -> int:
         # dfs recursive
         
@@ -15,6 +38,7 @@ class Solution:
             return max(self.minDepth(root.left), self.minDepth(root.right)) + 1
         else:
             return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+        
         
    def minDepth(self, root: Optional[TreeNode]) -> int:
     # dfs iterative
