@@ -53,9 +53,12 @@ class Solution:
         if root is None or subRoot is None: return False
         # if (root is None and subRoot is not None) or (root is not None and subRoot is None): return False
         
+        # recursion
         if root.val == subRoot.val: 
             if self.sameTree(root.left, subRoot.left) and self.sameTree(root.right, subRoot.right):
                 return True
+            else:
+                return False
             
         # if root.val != subRoot.val: return False
         return False
