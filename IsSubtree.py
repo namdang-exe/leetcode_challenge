@@ -31,9 +31,14 @@ class Solution:
         
         # recursion
         # base case
-
+        # if root is null and subroot is not: is not subtree
+        # if root is not null and subroot is null: is subtree
+        # if root is null and subroot is null: pass to isMatch()
+        # if root is not null and subroot is not null: pass to isMatch()
+        if root is None and subRoot is not None: return False
+        if root is not None and subRoot is None: return True
+        
         if self.isMatch(root, subRoot): return True
-        if root is None: return False
         return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
         
         
