@@ -3,10 +3,10 @@
 
 class Solution:
     def frequencySort(self, s: str) -> str:
-        cnt = Counter(s) # O(n)
+        cnt = Counter(s)
         # t: 1, r: 1, e: 2
-        sorted_cnt = sorted(cnt.items(), key=lambda pairs:pairs[1], reverse=True) # O(nlogn)
-        res = ""
-        for key, val in sorted_cnt: # O(n)
-            res += key*val
-        return res
+        sorted_cnt = sorted(cnt.items(), key=lambda pairs:pairs[1], reverse=True)
+        res = []
+        for key, val in sorted_cnt:
+            res += [key]*val
+        return "".join(res)
