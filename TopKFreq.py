@@ -1,9 +1,18 @@
-# Counter method
+# hashmap + heap
+# O(klogn)
+from collections import Counter
+import heapq
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         cnt = Counter(nums)
-        sorted_cnt = sorted(cnt.items(), key=lambda pair:pair[1], reverse=True)
+        n = len(nums)
+        # build a heap
+        # max heap
+        heap = [(-v, k) for k, v in cnt.items()]
+        heapq.heapify(heap)
         res = []
         for i in range(k):
-            res.append(sorted_cnt[i][0])
+            needed = heapq.heappop(heap)
+            res.append(needed[1])
+            
         return res
