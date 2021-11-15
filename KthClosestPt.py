@@ -8,7 +8,7 @@ class Solution:
             return (x**2+y**2)**0.5
         
         # [(dist, [x,y])]
-        heap = [(-eucli_dist(x,y), [x,y]) for x,y in points[:k]]
+        heap = [(-eucli_dist(x,y), x,y) for x,y in points[:k]]
         # build a max heap
         # O(k)
         heapq.heapify(heap)
@@ -18,6 +18,6 @@ class Solution:
         for point in points[k:]:
             x, y = point
             if eucli_dist(x,y) < -heap[0][0]:
-                heapq.heapreplace(heap, (-eucli_dist(x,y), [x,y]))
+                heapq.heapreplace(heap, (-eucli_dist(x,y), x,y))
         # return the result array
-        return [[x,y] for dist, [x,y] in heap]
+        return [[x,y] for (dist, x,y) in heap]
