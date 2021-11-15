@@ -20,10 +20,4 @@ class Solution:
             if eucli_dist(x,y) < -heap[0][0]:
                 heapq.heapreplace(heap, (-eucli_dist(x,y), [x,y]))
         # return the result array
-        # O(k)
-        res = []
-        for val in heap:
-            pt = val[1]
-            res.append(pt)
-        
-        return res
+        return [[x,y] for dist, [x,y] in heap]
