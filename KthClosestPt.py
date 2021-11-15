@@ -1,23 +1,19 @@
 # Second approach
-# Create a heap of size k
+# Instead of creating a heap of size k
+# we use heappushpop instead
 # O(nlogk)
 import heapq
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        def eucli_dist(x,y):
-            return (x**2+y**2)**0.5
-        
-        # [(dist, [x,y])]
-        heap = [(-eucli_dist(x,y), x,y) for x,y in points[:k]]
-        # build a max heap
-        # O(k)
-        heapq.heapify(heap)
-
-        # add points to the heap
+        heap = []
         # O(nlogk)
-        for point in points[k:]:
+        for point in points:
             x, y = point
-            if eucli_dist(x,y) < -heap[0][0]:
-                heapq.heapreplace(heap, (-eucli_dist(x,y), x,y))
-        # return the result array
+            dist = -(x**2+y**2)**0.5
+            if len(heap) < k:
+                # max heap
+                # [(dist, x,y)]
+                heapq.heappush(heap,(dist, x,y))
+            else:
+                heapq.heappushpop(heap, (dist, x, y))
         return [[x,y] for (dist, x,y) in heap]
