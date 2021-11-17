@@ -1,12 +1,16 @@
-# bottom up approach
-cache = {}
-def fib(cache,n):
-    for k in range(n+1):
-        if k < 2:
-            res = 1
-        else: 
-            res = cache[k-1] + cache[k-2]
-        cache[k] = res
-    return cache[n]
-
-print(fib(cache, 7))
+# Tabulation aka build a table
+# Iterative
+class Solution:
+    def fib(self, n: int) -> int:
+        # initialize table
+        # [0,0,0,0,0,...]
+        
+        if n == 0:
+            return 0
+        if n== 1:
+            return 1
+        tab = [0] * (n+1)
+        tab[1] = 1
+        for i in range(2,n+1):
+            tab[i] = tab[i-1] + tab[i-2]
+        return tab[n]
