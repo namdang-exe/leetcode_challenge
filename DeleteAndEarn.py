@@ -14,10 +14,12 @@ class Solution:
         # TODO: edge cases
         
         # DP
-        dp = [0] * m
-        dp[1] =  freq[1]
-        for i in range(2, m):
-            dp[i] = max(i*freq[i] + dp[i-2], dp[i-1])
+        # two pointers
+        one, two = 0, 0
+        for i in range(1, m):
+            max_points = max(freq[i]*i + one, two)
+            one = two
+            two = max_points
             
-        return dp[-1]
+        return two
         
