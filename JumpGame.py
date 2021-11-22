@@ -1,12 +1,12 @@
 # Recursion
 class Solution:
     def __init__(self):
+        # {3: false} -- this a dead end
         self.cache = {}
-        # 3: false
         
     def canJump(self, nums: List[int]) -> bool:
-        d =  len(nums)-1
-        return self.helper(nums, 0,d)
+        d = len(nums) - 1
+        return self.helper(nums, 0, d)
     
     def helper(self, nums, i, d):
         """
@@ -15,15 +15,14 @@ class Solution:
         d: destination
         """
         
+        # Check cache
         if i in self.cache: return False
         
-        # base case 
-        if i >= d: 
-            return True
+        # Base case 
+        if i >= d: return True
+        if nums[i] == 0: return False
         
-        if nums[i] == 0: 
-            return False
-        
+        # Recursion
         jump_len = nums[i]
         for l in range(1, jump_len+1)[::-1]:
             idx = i + l
@@ -34,4 +33,3 @@ class Solution:
                 self.cache[idx] = res
         return False
             
-    
