@@ -1,10 +1,15 @@
-# Brute force
+# dynamic programming
+# 2 parts: A[i] + i + A[j] - j 
+# dp1 for A[i] + i
+# dp2 for dp1 + A[j] - j
+# note: update dp2 before dp1 bc we want to skip the last element of dp1 
+# which is the end aka no sightseeing
 class Solution:
     def maxScoreSightseeingPair(self, values: List[int]) -> int:
-        max_score = 0
-        for i in range(len(values)):
-            for j in range(i+1,len(values)):
-                cur_score = values[i] + values[j] + i - j
-                max_score = max(max_score, cur_score)
-                
-        return max_score
+        max_so_far = values[0]
+        result = 0
+        for i in range(1, len(values)):
+            result = max(result, max_so_far + values[i] - i)
+            max_so_far = max(max_so_far, values[i] + i)
+            
+        return result
