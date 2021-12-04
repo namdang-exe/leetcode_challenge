@@ -1,26 +1,23 @@
-# Recursion with memoize
+# DP tabulation
+# Bottom up approach
 # O(mn) time
 # O(mn) space
-
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
         m = len(grid)
         n = len(grid[0])
-        cache = {} # {(1, 1): 4}
+        dp = [[0] * (n+1) for _ in range(m+1)]
+        # Make the out_of_bound grid = inf
+        for row_i in range(m):
+            dp[row_i][n] = float('inf')
+        for col_j in range(n):
+            dp[m][col_j] = float('inf')
+        dp[m][n-1] = 0
         
-        def bfs(row, col):
-            # breath first search
-            # recursion
-            
-            if (row, col) in cache: return cache[(row,col)]
-            # base cases
-            if row == m or col == n: return float('inf')
-            if row == (m -1) and col == (n-1): return grid[row][col]
-            
-            # recursion
-            res = 0
-            res = min(bfs(row + 1, col), bfs(row, col + 1)) + grid[row][col]
-            cache[(row, col)] = res
-            
-            return cache[(row,col)]
-        return bfs(0,0)
+        # fill in dp
+        for row_i in range(m)[::-1]:
+            for col_j in range(n)[::-1]:
+                dp[row_i][col_j] = min(dp[row_i+1][col_j], dp[row_i][col_j+1]) + grid[row_i][col_j]
+                
+        return dp[0][0]
+    
