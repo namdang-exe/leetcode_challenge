@@ -1,21 +1,25 @@
-# Brute force
+# More optimal solution
 class Solution:
     def countSubstrings(self, s: str) -> int:
-        def check_pal(s):
-            "This func will check if a string is a palindrome"
-            if len(s) <= 1: return True
-            left, right = 0, len(s) -1
-            while left < right:
-                if s[left] != s[right]:
-                    return False
-                left += 1
-                right -= 1
-            return True
-        
         n = len(s)
         res = 0
         for i in range(n):
-            for j in range(i, n):
-                if check_pal(s[i:j+1]):
+            # odd substrings
+            L, R = i, i
+            while 0 <= L < n and 0 <= R < n:
+                if s[L] != s[R]:
+                    break
+                else:
                     res += 1
-                    
+                    L -= 1
+                    R += 1
+            # even substrings
+            L, R = i, i+1
+            while 0 <= L < n and 0 <= R < n:
+                if s[L] != s[R]:
+                    break
+                else:
+                    res += 1
+                    L -= 1
+                    R += 1
+        return res
