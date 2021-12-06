@@ -11,9 +11,4 @@ class Solution:
             else:
                 dx, dy = dy, -dx
         # check if it's a cycle
-        if x == 0 and y == 0:
-            return True
-        else:
-            if dx != 0 or dy != 1:
-                return True
-        return False
+        return (x,y) == (0,0) or (dx,dy) != (0, 1)
