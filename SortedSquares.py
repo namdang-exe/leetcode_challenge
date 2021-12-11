@@ -1,7 +1,16 @@
-# O(nlogn) time
-# O(1) space
+# O(n) time
+# O(n) space
+from collections import deque
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
-        for i in range(len(nums)):
-            nums[i] = nums[i] **2
-        return sorted(nums) 
+        res = deque()
+        left, right = 0, len(nums) - 1 
+        while left <= right:
+            if abs(nums[left]) < abs(nums[right]):
+                squares = nums[right] ** 2
+                right -= 1
+            else:
+                squares = nums[left] ** 2
+                left += 1
+            res.appendleft(squares)
+        return res
