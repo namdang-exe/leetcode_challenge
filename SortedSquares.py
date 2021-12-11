@@ -1,8 +1,7 @@
 # O(nlogn) time
-# O(n) space
+# O(1) space
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
-        res = []
-        for num in nums:
-            num = num**2
-        return sorted(res) # O(nlogn)
+        for i in range(len(nums)):
+            nums[i] = nums[i] **2
+        return sorted(nums) 
