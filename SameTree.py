@@ -15,7 +15,12 @@ class Solution:
         # if one of them is empty => Not the same
         if not p or not q:
             return False
-        # their val is not == => not the same
-        if p.val != q.val:
-            return False
-        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+        # if p.val == q.val => Check left and right
+        if p.val == q.val:
+            if self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right):
+                return True
+            else:
+                return False
+            
+        # if their val is not equal => Not the same
+        return False
