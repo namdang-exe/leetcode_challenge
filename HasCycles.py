@@ -6,7 +6,7 @@
 # - the total len is int
 # - distance between fast and slow is int
 # Space: O(1)
-# LBYL
+# EAFP
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -16,11 +16,11 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        slow, fast = head, head
-        
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-            if slow == fast:
-                return True
-        return False
+        try:
+            slow, fast = head, head.next
+            while slow != fast:
+                slow = slow.next
+                fast = fast.next.next
+            return True
+        except:
+            return False
