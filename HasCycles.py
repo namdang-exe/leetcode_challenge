@@ -1,8 +1,12 @@
-# if the node point to null => reach the end => return false
-# use hashset to store the node object
-# if node in hashset => it has a cycle => return true
-# Time: O(n) - visit each node once
-# Space: O(n) - store all node in the hashset
+# Floyd's tortoise and hare
+# 1 fast and slow pointer
+# eventually the fast ptr will catch up w the slow ptr
+# Time: O(n) why?
+# it will catch up in a cycle
+# - the total len is int
+# - distance between fast and slow is int
+# Space: O(1)
+# LBYL
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -12,11 +16,11 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        seen = set()
-        while head is not None:
-            if head in seen: 
+        slow, fast = head, head
+        
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
                 return True
-            else: 
-                seen.add(head)
-            head = head.next
         return False
