@@ -5,7 +5,7 @@ Fast ptr travel twice as fast as slow ptr
 when fast reach the end, slow reach half
 Time: O(n)
 Space: O(1)
-EAPF
+LBYL
 '''
 # Definition for singly-linked list.
 # class ListNode:
@@ -14,13 +14,8 @@ EAPF
 #         self.next = next
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        try:
-            slow = head
-            fast = head.next
-            while fast:
-                slow = slow.next
-                # travel twice as fast
-                fast = fast.next.next
-            return slow
-        except:
-            return slow
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
